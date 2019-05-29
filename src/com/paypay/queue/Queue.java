@@ -1,5 +1,7 @@
 package com.paypay.queue;
 
+import java.util.List;
+
 public interface Queue<T> {
   Queue<T> enQueue(T t);
 
@@ -8,4 +10,6 @@ public interface Queue<T> {
   T head();
 
   boolean isEmpty();
+
+  List<T> print();
 }
