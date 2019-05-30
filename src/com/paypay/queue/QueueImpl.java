@@ -1,37 +1,43 @@
 package com.paypay.queue;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public final class QueueImpl<T> implements Queue {
 
   private final List<T> nodes;
 
   public QueueImpl() {
-    this.nodes = new LinkedList<>();
+    this.nodes = new ArrayList<>();
   }
 
   public QueueImpl(List<T> nodes) {
-    List<T> tempNode = new LinkedList<>();
-    tempNode.addAll(nodes);
-    this.nodes = Collections.unmodifiableList(tempNode);
+    if (nodes != null && !nodes.isEmpty()) {
+      List<T> tempNode = new ArrayList<>();
+      tempNode.addAll(nodes);
+      this.nodes = Collections.unmodifiableList(tempNode);
+    } else {
+      this.nodes = new ArrayList<>();
+    }
   }
 
   @Override
   public Queue enQueue(Object o) {
-    List<T> tempNode = new LinkedList<>();
-    for (T t : nodes) {
-      tempNode.add(t);
+    if (Objects.nonNull(o)) {
+      List<T> tempNode = new ArrayList<>();
+      tempNode.addAll(nodes);
+      tempNode.add((T) o);
+      return new QueueImpl(tempNode);
     }
-    tempNode.add((T)o);
-    return new QueueImpl(tempNode);
+    return new QueueImpl();
   }
 
   @Override
   public Queue deQueue() {
-    List<T> tempNode = new LinkedList<>();
-    if (!isEmpty()){
+    List<T> tempNode = new ArrayList<>();
+    if (!isEmpty()) {
       tempNode.addAll(nodes);
       tempNode.remove(0);
       return new QueueImpl(tempNode);
@@ -41,7 +47,7 @@ public final class QueueImpl<T> implements Queue {
 
   @Override
   public Object head() {
-    return nodes.get(0);
+    return isEmpty() ? null : nodes.get(0);
   }
 
   @Override
