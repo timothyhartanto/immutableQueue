@@ -21,6 +21,11 @@ public class PayPay {
 
     System.out.println();
 
+    Queue qRef = q1;
+    System.out.println("qRef print a : " + qRef);
+
+    System.out.println();
+
     q1 = q1.enQueue("b");
     System.out.println("q1 print a, b : " + q1.print());
 
@@ -30,6 +35,14 @@ public class PayPay {
 
     System.out.println();
 
+    list.add("z");
+
+    System.out.println("list print a, z : " + list);
+    System.out.println("q1 print a, b : " + q1.print());
+    System.out.println("q qRef print a : " + qRef.print());
+
+    System.out.println();
+    
     Queue q3 = q2.enQueue("d");
     System.out.println("q1 print a, b : " + q1.print());
     System.out.println("q2 print a, b, c : " + q2.print());
@@ -82,7 +95,7 @@ public class PayPay {
 
     q1.enQueue("a");
     System.out.println("q1 print empty list : " + q1.print());
-    
+
     q1 = q1.enQueue("x");
     System.out.println("q1 print x : " + q1.head());
   }

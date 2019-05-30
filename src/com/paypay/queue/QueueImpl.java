@@ -17,7 +17,7 @@ public final class QueueImpl<T> implements Queue {
     if (nodes != null && !nodes.isEmpty()) {
       List<T> tempNode = new ArrayList<>();
       tempNode.addAll(nodes);
-      this.nodes = Collections.unmodifiableList(tempNode);
+      this.nodes = tempNode;
     } else {
       this.nodes = new ArrayList<>();
     }
