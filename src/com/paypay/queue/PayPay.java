@@ -1,102 +1,53 @@
 package com.paypay.queue;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class PayPay {
   public static void main(String args[]) {
-    List<String> list = new ArrayList<>();
-    list.add("a");
+    String[] arr = {"a"};
 
-    Queue q = new QueueImpl(null);
-    System.out.println("q print null : " + q.head());
+    Queue q = new QueueImpl(arr);
+    System.out.println("q print a : " + q.head());
 
-    q = new QueueImpl();
+    q = q.enQueue("b");
+    System.out.println("q print a, b : " + q.print());
+    System.out.println("arr print a : " + Arrays.toString(arr));
+
+    System.out.println();
+
+    q = q.deQueue();
+    System.out.println("q print b : " + q.print());
+    System.out.println("q print b : " + q.head());
+
+    q = q.deQueue();
+    System.out.println("q print true : " + q.isEmpty());
+
+    q = new QueueImpl(String.class, 0);
     System.out.println("q print empty list : " +  q.print());
 
     System.out.println();
 
-    Queue q1 = new QueueImpl(list);
-    System.out.println("q1 print a : " + q1.print());
+    String[] arrString = {"a", "b", "c", "d"};
+    q = new QueueImpl(arrString);
+    System.out.println("q print a, b, c, d : " + q.print());
 
     System.out.println();
 
-    Queue qRef = q1;
-    System.out.println("qRef print a : " + qRef);
+    q.deQueue();
+    q.deQueue();
+    System.out.println("q print a, b, c, d : " + q.print());
+
+    q = q.deQueue();
+    System.out.println("q print b, c, d : " + q.print());
 
     System.out.println();
 
-    q1 = q1.enQueue("b");
-    System.out.println("q1 print a, b : " + q1.print());
+    q.enQueue("e");
+    q.enQueue("f");
+    System.out.println("q print b, c, d : " + q.print());
 
-    Queue q2 = q1.enQueue("c");
-    System.out.println("q1 print a, b : " + q1.print());
-    System.out.println("q2 print a, b, c : " + q2.print());
-
-    System.out.println();
-
-    list.add("z");
-
-    System.out.println("list print a, z : " + list);
-    System.out.println("q1 print a, b : " + q1.print());
-    System.out.println("q qRef print a : " + qRef.print());
-
-    System.out.println();
-    
-    Queue q3 = q2.enQueue("d");
-    System.out.println("q1 print a, b : " + q1.print());
-    System.out.println("q2 print a, b, c : " + q2.print());
-    System.out.println("q3 print a, b, c, d : " + q3.print());
-
-    System.out.println();
-
-    Queue q4 = q3.deQueue();
-    System.out.println("q1 print a, b : " + q1.print());
-    System.out.println("q2 print a, b, c : " + q2.print());
-    System.out.println("q3 print a, b, c, d : " + q3.print());
-    System.out.println("q4 print b, c, d : " + q4.print());
-
-    System.out.println();
-
-    q3 = q3.deQueue();
-    q3 = q3.deQueue();
-    q3 = q3.deQueue();
-    System.out.println("q1 print a, b : " + q1.print());
-    System.out.println("q2 print a, b, c : " + q2.print());
-    System.out.println("q3 print d : " + q3.print());
-    System.out.println("q4 print b, c, d : " + q4.print());
-
-    System.out.println();
-
-    q1 = q1.deQueue();
-    q1 = q1.deQueue();
-    System.out.println("q1 print empty list : " + q1.print());
-    System.out.println("q2 print a, b, c : " + q2.print());
-    System.out.println("q3 print d : " + q3.print());
-    System.out.println("q4 print b, c, d : " + q4.print());
-
-    System.out.println();
-
-    q4 = q4.deQueue();
-    q4 = q4.deQueue();
-    q4 = q4.deQueue();
-    q4 = q4.deQueue();
-    System.out.println("q1 print empty list : " + q1.print());
-    System.out.println("q2 print a, b, c : " + q2.print());
-    System.out.println("q3 print d : " + q3.print());
-    System.out.println("q4 print empty list : " + q4.print());
-
-    System.out.println();
-
-    q1 = q1.enQueue(null);
-    System.out.println("q1 print empty list : " + q1.print());
-    System.out.println("q1 print null : " + q1.head());
-    System.out.println("q1 print true : " + q1.isEmpty());
-
-    q1.enQueue("a");
-    System.out.println("q1 print empty list : " + q1.print());
-
-    q1 = q1.enQueue("x");
-    System.out.println("q1 print x : " + q1.head());
+    q = q.enQueue("e");
+    q = q.enQueue("f");
+    System.out.println("q print b, c, d, e, f : " + q.print());
   }
 }

@@ -1,62 +1,53 @@
 package com.paypay.queue;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Objects;
 
 public final class QueueImpl<T> implements Queue {
 
-  private final List<T> nodes;
+  private final T nodes[];
 
-  public QueueImpl() {
-    this.nodes = new ArrayList<>();
+  public QueueImpl(Class<T> type, int size) {
+    this.nodes = (T[]) Array.newInstance(type, size);
   }
 
-  public QueueImpl(List<T> nodes) {
-    if (nodes != null && !nodes.isEmpty()) {
-      List<T> tempNode = new ArrayList<>();
-      tempNode.addAll(nodes);
-      this.nodes = tempNode;
-    } else {
-      this.nodes = new ArrayList<>();
-    }
+  public QueueImpl(T nodes[]) {
+    this.nodes = nodes;
   }
 
   @Override
   public Queue enQueue(Object o) {
     if (Objects.nonNull(o)) {
-      List<T> tempNode = new ArrayList<>();
-      tempNode.addAll(nodes);
-      tempNode.add((T) o);
-      return new QueueImpl(tempNode);
+      T tempNodes[] = (T[]) Array.newInstance(o.getClass(), this.nodes.length + 1);
+      System.arraycopy(this.nodes, 0, tempNodes, 0, this.nodes.length);
+      tempNodes[this.nodes.length] = (T) o;
+      return new QueueImpl(tempNodes);
     }
-    return new QueueImpl();
+    return new QueueImpl(o.getClass(), 0);
   }
 
   @Override
   public Queue deQueue() {
-    List<T> tempNode = new ArrayList<>();
     if (!isEmpty()) {
-      tempNode.addAll(nodes);
-      tempNode.remove(0);
+      T tempNode[] = Arrays.copyOfRange(this.nodes, 1, this.nodes.length);
       return new QueueImpl(tempNode);
     }
-    return new QueueImpl();
+    return new QueueImpl(this.nodes.getClass(), 0);
   }
 
   @Override
   public Object head() {
-    return isEmpty() ? null : nodes.get(0);
+    return isEmpty() ? null : this.nodes[0];
   }
 
   @Override
   public boolean isEmpty() {
-    return nodes.isEmpty();
+    return this.nodes.length == 0;
   }
 
   @Override
-  public List<T> print() {
-    return nodes;
+  public String print() {
+    return Arrays.toString(this.nodes);
   }
 }

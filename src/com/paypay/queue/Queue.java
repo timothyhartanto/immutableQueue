@@ -11,5 +11,5 @@ public interface Queue<T> {
 
   boolean isEmpty();
 
-  List<T> print();
+  String print();
 }
