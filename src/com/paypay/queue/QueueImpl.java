@@ -8,10 +8,6 @@ public final class QueueImpl<T> implements Queue {
 
   private final T nodes[];
 
-  public QueueImpl(Class<T> type, int size) {
-    this.nodes = (T[]) Array.newInstance(type, size);
-  }
-
   public QueueImpl(T nodes[]) {
     this.nodes = nodes;
   }
@@ -24,7 +20,7 @@ public final class QueueImpl<T> implements Queue {
       tempNodes[this.nodes.length] = (T) o;
       return new QueueImpl(tempNodes);
     }
-    return new QueueImpl(o.getClass(), 0);
+    return new QueueImpl(this.nodes);
   }
 
   @Override
@@ -33,7 +29,7 @@ public final class QueueImpl<T> implements Queue {
       T tempNode[] = Arrays.copyOfRange(this.nodes, 1, this.nodes.length);
       return new QueueImpl(tempNode);
     }
-    return new QueueImpl(this.nodes.getClass(), 0);
+    return new QueueImpl(this.nodes);
   }
 
   @Override
@@ -43,7 +39,7 @@ public final class QueueImpl<T> implements Queue {
 
   @Override
   public boolean isEmpty() {
-    return this.nodes.length == 0;
+    return this.nodes == null || this.nodes.length == 0;
   }
 
   @Override

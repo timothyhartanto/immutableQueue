@@ -21,10 +21,7 @@ public class PayPay {
 
     q = q.deQueue();
     System.out.println("q print true : " + q.isEmpty());
-
-    q = new QueueImpl(String.class, 0);
-    System.out.println("q print empty list : " +  q.print());
-
+    System.out.println("q print [] : " + q.print());
     System.out.println();
 
     String[] arrString = {"a", "b", "c", "d"};
@@ -48,6 +45,11 @@ public class PayPay {
 
     q = q.enQueue("e");
     q = q.enQueue("f");
+    System.out.println("q print b, c, d, e, f : " + q.print());
+
+    System.out.println();
+
+    q = q.enQueue(null);
     System.out.println("q print b, c, d, e, f : " + q.print());
   }
 }
