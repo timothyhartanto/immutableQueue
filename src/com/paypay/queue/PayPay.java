@@ -51,5 +51,14 @@ public class PayPay {
 
     q = q.enQueue(null);
     System.out.println("q print b, c, d, e, f : " + q.print());
+
+    arr = new String[0];
+    q = new QueueImpl(arr);
+    q = q.enQueue("x");
+    System.out.println("q print x : " + q.print());
+
+    q = new QueueImpl(null);
+    q = q.enQueue("z");
+    System.out.println("q print z : " + q.print());
   }
 }
