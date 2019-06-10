@@ -1,9 +1,7 @@
 package com.paypay.queue;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public final class QueueImpl<T> implements Queue {
@@ -21,11 +19,10 @@ public final class QueueImpl<T> implements Queue {
   @Override
   public Queue enQueue(Object o) {
     if (Objects.nonNull(o)) {
-      List<T> tempList = new ArrayList<>(Arrays.asList(this.nodes));
-      tempList.add((T) o);
-      return new QueueImpl(tempList.toArray());
-    }
-    return new QueueImpl(this.nodes);
+      T tempNodes[] = Arrays.copyOf(this.nodes, this.nodes.length + 1);
+      tempNodes[this.nodes.length] = (T) o;
+      return new QueueImpl(tempNodes);
+    } return new QueueImpl(this.nodes);
   }
 
   @Override
